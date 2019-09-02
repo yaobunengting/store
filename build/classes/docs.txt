@@ -1,0 +1,175 @@
+商城的实体:
+	用户
+	订单
+	商品
+	分类
+/////////////////////////////////////////
+准备工作:
+	数据库和表
+		create database store28;
+		use store28;
+		
+		CREATE TABLE `user` (
+		  `uid` varchar(32) NOT NULL,
+		  `username` varchar(20) DEFAULT NULL,
+		  `password` varchar(100) DEFAULT NULL,
+		  `name` varchar(20) DEFAULT NULL,
+		  `email` varchar(30) DEFAULT NULL,
+		  `telephone` varchar(20) DEFAULT NULL,
+		  `birthday` date DEFAULT NULL,
+		  `sex` varchar(10) DEFAULT NULL,
+		  `state` int(11) DEFAULT NULL,
+		  `code` varchar(64) DEFAULT NULL,
+		  PRIMARY KEY (`uid`)
+		) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+	项目
+		包结构
+			com.itheima.web.servlet
+			com.itheima.web.filter
+			com.itheima.service 		---service 的接口
+			com.itheima.service.impl 	---service 的实现类
+			com.itheima.dao				---dao的接口	
+			com.itheima.dao.impl		---dao的接口	
+			com.itheima.domain
+			com.itheima.utils
+			com.itheima.constant
+			
+		jar包
+			驱动
+			c3p0
+			dbuitls
+			beanutils
+			jstl
+			邮件
+		工具类和配置文件
+			datasourceutils 和 c3p0配置文件
+			uuidutils
+			uploadutils
+			md5uitls
+			mailutils
+			
+		前台页面
+			将页面拷贝到项目中
+//////////////////////////////////////////////
+用户模块:
+	注册
+		发送邮件的方式发送激活码 
+	激活
+	登录
+	退出
+							
+////////////////////////////////////////////
+通用servlet设计
+	
+	
+	只定义一个Userservlet
+		重写doget和dopost
+		
+	例如添加用户的时候
+		以前: /store/addUser
+		现在: /store/user?method=add
+		
+		修改用户的时候
+		以前: /store/updateUser
+		现在: /store/user?method=update
+		
+	在userservlet中doget方法中
+		Stirng m=request.getParameter("method");
+		if("add".equals(m)){
+			add(HttpServletRequest,HttpServletResponse)
+		}else if("update".equals(m)){
+			update(HttpServletRequest,HttpServletResponse)
+		}else if(){
+		
+		}
+							
+		
+	我们可以直接重写service方法即可
+		在service方法中写上面的判断代码即可
+	//////////////////////////////////////////////
+	BaseServlet extends HttpServlet{}
+	
+	其他的servlet继承baseServlet
+	
+	
+	在baseservlet中重写service方法
+		1.获取请求的方法
+		2.找到相应的子类 父类中的this代表的是子类
+			Class clazz=this.getClass()
+		3.子类调用方法
+			通过方法名称 获取一个指定的方法 
+				Method m=clazz.getMethod(方法名,HttpServletRequest.class,HttpServletResponse.class)
+			方法执行
+				m.invoke(this,HttpServletRequest,HttpServletResponse);
+	
+	以前在servlet中 我们执行方法之后无非 请求转发 重定向 打印数据 
+		请求转发  reuqest.getRequestDispatcher().forward()
+		
+		继续完善我们baseservlet中service
+			在第3步,方法执行返回值,
+			现在我让所有的方法都返回一个字符串  add update
+				字符串代表的是请求转发的路径
+				若该方法不转发只需要返回一个null
+			String s=(String)m.invoke(this,HttpServletRequest,HttpServletResponse);
+			if(s!=null){
+				reuqest.getRequestDispatcher(s).forward(...);
+			}
+	//////////////////////////////////
+	案例1-用户注册
+		
+	步骤实现:
+		1.在index.jsp上点击 注册页面 跳转到register.jsp
+		2.点击注册 
+			<a href="/store/user?method=registUI"></a>
+			
+		3.在userservlet中编写一个registUI 方法
+			请求转发到 register.jsp即可.
+	完成注册
+		1.regist
+			封装数据
+				设置id
+				设置state
+				设置code
+			调用service 完成注册操作
+			请求转发 /jsp/msg.jsp
+		2.userservice中的service
+			调用dao
+			发送激活邮件
+		3.userdao dao 添加一条数据
+		
+	注意:封装数据的时候报了一个错误
+		是因为 字符串装成时间类型的是出现错误
+			BeanUtils不支持字符串装成时间
+	解决方案:
+		自定义转化器
+			1.编写一个类 实现Conventer接口
+			2.实现方法
+				convert(转换成的类型,前台页面传入的字符串)
+			3.注册转化器 在封装数据之前注册
+				ConvertUtils.register(new MyConventer(), Date.class);
+	
+扩展:
+	使用算法加密密码
+	md5加密 不对称的加密,不可逆
+	在数据库中可以使用 md5(字段|值)
+	java中api
+	
+////////////////////////////////
+	电子邮箱:就是在邮件服务器上开启的一块空间
+	服务器:提供邮件服务
+	协议:规定数据的格式
+	
+	发送邮件的协议:smtp
+	接受邮件的协议:pop / pop3    imap
+	
+/////////////////////////////////
+本地的服务器 :
+		邮件服务器
+			设置域名  store.com
+		新增几个账户 (普通用户)
+			jack 
+			tom
+		新增一个管理员账户 
+			service
+	
+.///////////////////////////////////
