@@ -20,10 +20,15 @@ public class UserDaoImpl implements UserDao{
 	@Override
 	public void add(User user) throws SQLException {
 		QueryRunner qr = new QueryRunner(DataSourceUtils.getDataSource());
-		String sql = "INSERT INTO user VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?); ";
+		//String sql = "INSERT INTO user VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?); ";
+//		qr.update(sql, user.getUid(), user.getUsername(), user.getPassword(), 
+//				user.getName(), user.getEmail(), user.getTelephpne(),
+//				user.getBirthday(), user.getSex(), user.getState(), user.getCode());
+		
+		String sql = "INSERT INTO user VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
 		qr.update(sql, user.getUid(), user.getUsername(), user.getPassword(), 
-				user.getName(), user.getEmail(), user.getTelephpne(),
-				user.getBirthday(), user.getSex(), user.getState(), user.getCode());
+				user.getName(), user.getEmail(), user.getTelephpne(), user.getBirthday(),
+				user.getSex(), user.getCode(), user.getState());
 	}
 
 }

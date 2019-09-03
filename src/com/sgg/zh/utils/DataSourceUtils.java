@@ -7,7 +7,8 @@ import java.sql.SQLException;
 import javax.sql.DataSource;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
-import com.mysql.jdbc.Statement;
+import com.mysql.cj.xdevapi.Statement;
+
 
 /**
  * 数据库连接工具类
@@ -71,7 +72,7 @@ public class DataSourceUtils {
 	private static void closeStatement(Statement st) {
 		if (st != null) {
 			try {
-				st.close();
+				((Connection) st).close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
