@@ -19,7 +19,6 @@ public class BaseServlet extends HttpServlet {
 		try {
 			//1.获取子类
 			Class clazz = this.getClass();
-			System.out.println(this);
 			
 			//2.获取请求的方法
 			String m = request.getParameter("method");

@@ -1,6 +1,7 @@
 package com.sgg.zh.Entity;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 /**
  * 用户实体
@@ -17,7 +18,7 @@ public class User {
 	private String email;
 	private String telephpne;
 
-	private LocalDate birthday;
+	private Date birthday;
 	private String sex;
 	private Integer state = 0; // 激活状态 值为1:激活 为0:未激活
 	private String code;
@@ -70,11 +71,11 @@ public class User {
 		this.telephpne = telephpne;
 	}
 
-	public LocalDate getBirthday() {
+	public Date getBirthday() {
 		return birthday;
 	}
 
-	public void setBirthday(LocalDate birthday) {
+	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
 	}
 
