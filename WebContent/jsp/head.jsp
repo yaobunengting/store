@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!--
             	时间：2015-12-30
             	描述：菜单栏
@@ -46,16 +47,14 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">首页</a>
+				<a class="navbar-brand" href="${pageContext.request.contextPath }/index?method=index">首页</a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
-				<ul class="nav navbar-nav">
-					<c:forEach items="${clist }" var="c">
-						<li><a href="#">${c.cname }</a></li>
-					</c:forEach>
+				<ul id="menuId" class="nav navbar-nav">
+					
 				</ul>
 				<form class="navbar-form navbar-right" role="search">
 					<div class="form-group">
@@ -74,7 +73,15 @@
 	$(function(){
 		//发送Ajax请求
 		$.get("${pageContext.request.contextPath }/category?method=findAll", function(data){
-			alert(data);
+			//获取元素(获取menu的ul标签)
+			var $ul = $("#menuId");
+			
+			//遍历数组
+			$(data).each(function(){
+				//操作元素
+				$ul.append($("<li><a href='#'>"+this.cname+"</a></li>"));
+			});
+			
 		}, "json");
 	});
 </script>

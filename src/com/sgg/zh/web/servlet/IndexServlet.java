@@ -8,7 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.sgg.zh.Entity.Category;
+import com.sgg.zh.entity.Category;
 import com.sgg.zh.service.CategoryService;
 import com.sgg.zh.service.impl.CategoryServiceImpl;
 

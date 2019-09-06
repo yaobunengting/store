@@ -2,7 +2,7 @@ package com.sgg.zh.dao;
 
 import java.sql.SQLException;
 
-import com.sgg.zh.Entity.User;
+import com.sgg.zh.entity.User;
 
 public interface UserDao {
 

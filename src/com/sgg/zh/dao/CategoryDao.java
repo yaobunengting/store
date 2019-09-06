@@ -2,7 +2,7 @@ package com.sgg.zh.dao;
 
 import java.util.List;
 
-import com.sgg.zh.Entity.Category;
+import com.sgg.zh.entity.Category;
 
 public interface CategoryDao {
 

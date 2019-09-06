@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.ConvertUtils;
 
-import com.sgg.zh.Entity.User;
 import com.sgg.zh.constant.Constant;
+import com.sgg.zh.entity.User;
 import com.sgg.zh.myconventer.MyConventer;
 import com.sgg.zh.service.UserService;
 import com.sgg.zh.service.impl.UserServiceImpl;

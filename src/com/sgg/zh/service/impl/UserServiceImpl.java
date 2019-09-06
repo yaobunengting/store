@@ -1,8 +1,8 @@
 package com.sgg.zh.service.impl;
 
-import com.sgg.zh.Entity.User;
 import com.sgg.zh.dao.UserDao;
 import com.sgg.zh.dao.impl.UserDaoImpl;
+import com.sgg.zh.entity.User;
 import com.sgg.zh.service.UserService;
 import com.sgg.zh.utils.MailUtils;
 

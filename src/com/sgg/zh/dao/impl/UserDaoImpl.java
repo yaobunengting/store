@@ -8,8 +8,8 @@ import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.taglibs.standard.tag.common.sql.DataSourceUtil;
 
-import com.sgg.zh.Entity.User;
 import com.sgg.zh.dao.UserDao;
+import com.sgg.zh.entity.User;
 import com.sgg.zh.utils.DataSourceUtils;
 
 public class UserDaoImpl implements UserDao{

@@ -6,8 +6,8 @@ import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.ArrayHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 
-import com.sgg.zh.Entity.Category;
 import com.sgg.zh.dao.CategoryDao;
+import com.sgg.zh.entity.Category;
 import com.sgg.zh.utils.DataSourceUtils;
 
 public class CategoryDaoImpl implements CategoryDao {

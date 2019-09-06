@@ -1,6 +1,6 @@
 package com.sgg.zh.service;
 
-import com.sgg.zh.Entity.User;
+import com.sgg.zh.entity.User;
 
 public interface UserService {
 
