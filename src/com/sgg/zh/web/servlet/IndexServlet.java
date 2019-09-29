@@ -11,16 +11,18 @@ import javax.servlet.http.HttpServletResponse;
 import com.sgg.zh.entity.Product;
 import com.sgg.zh.service.ProductService;
 import com.sgg.zh.service.impl.ProductServiceImpl;
+import com.sgg.zh.utils.BeanFactory;
 
 /**
  * 和首页相关的servlet
  */
 @WebServlet("/index")
 public class IndexServlet extends BaseServlet {
-
+	
+	ProductService ps = (ProductService) BeanFactory.getBean("ProductService");
+	
 	public String index(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 去数据库中查询最新商品和热门商品 将他没放入request域中,请求转发
-		ProductService ps = new ProductServiceImpl();
 		
 		//最新商品
 		List<Product> newList = null;

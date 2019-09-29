@@ -16,6 +16,11 @@
 <!-- 引入自定义css文件 style.css -->
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/style.css" type="text/css" />
+<!--validate-->
+<script
+	src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+<script
+	src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
 
 <style>
 body {
@@ -41,6 +46,30 @@ font {
 	padding: 0 10px;
 }
 </style>
+
+<script type="text/javascript">
+	$(function(){
+		$("#formId").validate({
+			rules:{
+				username:"required",
+				password:"required",
+				email:"required",
+				name:"required",
+				code:"required",
+				
+			},
+			messages:{
+				username:"用户名为空",
+				password:"密码为空",
+				email:"邮箱为空",
+				name:"姓名为空",
+				code:"验证码为空",
+			}
+
+		});
+	});
+
+</script>
 </head>
 <body>
 
@@ -66,7 +95,7 @@ font {
 			<div class="col-md-8"
 				style="background: #fff; padding: 40px 80px; margin: 30px; border: 7px solid #ccc;">
 				<font>会员注册</font>USER REGISTER
-				<form class="form-horizontal" style="margin-top: 5px;"
+				<form id="formId" class="form-horizontal" style="margin-top: 5px;"
 					action="${pageContext.request.contextPath }/user?method=regist"
 					method="post">
 					<div class="form-group">
@@ -124,7 +153,7 @@ font {
 					<div class="form-group">
 						<label for="date" class="col-sm-2 control-label">验证码</label>
 						<div class="col-sm-3">
-							<input type="text" class="form-control">
+							<input name="code" type="text" class="form-control">
 
 						</div>
 						<div class="col-sm-2">

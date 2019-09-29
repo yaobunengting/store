@@ -16,6 +16,7 @@ import com.sgg.zh.entity.User;
 import com.sgg.zh.myconventer.MyConventer;
 import com.sgg.zh.service.UserService;
 import com.sgg.zh.service.impl.UserServiceImpl;
+import com.sgg.zh.utils.BeanFactory;
 import com.sgg.zh.utils.MD5Utils;
 import com.sgg.zh.utils.UUIDUtils;
 
@@ -24,6 +25,7 @@ import com.sgg.zh.utils.UUIDUtils;
  */
 @WebServlet("/user")
 public class UserServlet extends BaseServlet {
+	UserService s = (UserService) BeanFactory.getBean("UserService");
 
 	/**
 	 * 跳转到注册页面
@@ -63,7 +65,6 @@ public class UserServlet extends BaseServlet {
 		user.setPassword(MD5Utils.md5(user.getPassword()));
 
 		// 2.调用Service
-		UserService s = new UserServiceImpl();
 		s.regist(user);
 
 		// 3.页面请求转发
@@ -71,8 +72,6 @@ public class UserServlet extends BaseServlet {
 
 		return "/jsp/msg.jsp";
 	}
-
-	
 
 	/**
 	 * 
@@ -83,7 +82,7 @@ public class UserServlet extends BaseServlet {
 	public String active(HttpServletRequest request, HttpServletResponse response) {
 		// 1.获取激活码
 		String code = request.getParameter("code");
-		UserService s = new UserServiceImpl();
+		
 		// 2.调用service完成激活
 		try {
 			User user = s.active(code);
@@ -102,7 +101,7 @@ public class UserServlet extends BaseServlet {
 		// 3.请求转发到msg.jsp
 		return "/jsp/msg.jsp";
 	}
-	
+
 	/**
 	 * 跳转登陆页面
 	 * 
@@ -122,28 +121,28 @@ public class UserServlet extends BaseServlet {
 	 * @return
 	 */
 	public String login(HttpServletRequest request, HttpServletResponse response) {
-		//1.获取用户名和密码
+		// 1.获取用户名和密码
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		password = MD5Utils.md5(password);
-		//2.调用service完成登录操作,返回user
+		// 2.调用service完成登录操作,返回user
 		UserService s = new UserServiceImpl();
 		try {
 			User user = s.login(username, password);
-			//3.判断用户
-			if(user == null) {
-				//用户名密码不匹配
+			// 3.判断用户
+			if (user == null) {
+				// 用户名密码不匹配
 				request.setAttribute("msg", "用户名密码不匹配");
 				return "/jsp/login.jsp";
 			} else {
-				//继续判断用户的状态是否激活
-				if(Constant.USER_IS_ACTIVE != user.getState()) {
-					//用户未激活
+				// 继续判断用户的状态是否激活
+				if (Constant.USER_IS_ACTIVE != user.getState()) {
+					// 用户未激活
 					request.setAttribute("msg", "用户未激活");
 					return "/jsp/login.jsp";
 				}
 			}
-			//4.将user放入session中,重定向
+			// 4.将user放入session中,重定向
 			request.getSession().setAttribute("user", user);
 			response.sendRedirect(request.getContextPath());
 		} catch (IOException e) {
@@ -154,27 +153,28 @@ public class UserServlet extends BaseServlet {
 			e.printStackTrace();
 		}
 		return null;
-		
+
 	}
-	
+
 	/**
 	 * 用户退出
+	 * 
 	 * @param request
 	 * @param response
 	 * @return
 	 */
 	public String logout(HttpServletRequest request, HttpServletResponse response) {
-		//干掉session
+		// 干掉session
 		request.getSession().invalidate();
-		
-		//重定向
+
+		// 重定向
 		try {
 			response.sendRedirect(request.getContextPath());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//处理自动登录
+		// 处理自动登录
 		return null;
 	}
 }

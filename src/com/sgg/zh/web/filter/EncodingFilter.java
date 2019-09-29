@@ -39,6 +39,7 @@ public class EncodingFilter implements Filter {
 	}
 
 }
+
 class MyRequest extends HttpServletRequestWrapper {
 	private HttpServletRequest request;
 	private boolean flag = true;

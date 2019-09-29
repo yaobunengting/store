@@ -18,6 +18,33 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/style.css" type="text/css" />
 
+<!--validate-->
+<script
+	src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+<script
+	src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
+
+<script type="text/javascript">
+	$(function(){
+		$("#fromId").validate({
+			rules:{
+				username:"required",
+				password:"required",
+				code:"required"
+			},
+			messages:{
+				username:"用户名为空",
+				password:"密码为空",
+				code:"验证码为空",
+			}
+			
+			
+			
+		});
+	});
+
+</script>
+
 <style>
 body {
 	margin-top: 20px;
@@ -42,6 +69,9 @@ font {
 	padding-right: 17px;
 }
 </style>
+
+
+
 </head>
 <body>
 	<!-- 动态包含 -->
@@ -60,7 +90,7 @@ font {
 					<font>会员登录</font>USER LOGIN ${msg }
 
 					<div>&nbsp;</div>
-					<form class="form-horizontal"
+					<form id="fromId" class="form-horizontal"
 						action="${pageContext.request.contextPath }/user?method=login"
 						method="post">
 
@@ -74,7 +104,7 @@ font {
 						<div class="form-group">
 							<label for="inputPassword3" class="col-sm-2 control-label">密码</label>
 							<div class="col-sm-6">
-								<input type="password" class="form-control" id="inputPassword3"
+								<input type="password" class="form-control" id="password"
 									name="password" placeholder="请输入密码">
 							</div>
 						</div>
@@ -82,7 +112,7 @@ font {
 							<label for="inputPassword3" class="col-sm-2 control-label">验证码</label>
 							<div class="col-sm-3">
 								<input type="text" class="form-control" id="inputPassword3"
-									placeholder="请输入验证码">
+									name="code" placeholder="请输入验证码">
 							</div>
 							<div class="col-sm-3">
 								<img

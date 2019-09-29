@@ -81,6 +81,12 @@ public class Product implements Serializable{
 	public void setC(Category c) {
 		this.c = c;
 	}
+	@Override
+	public String toString() {
+		return "Product [pid=" + pid + ", pname=" + pname + ", market_price=" + market_price + ", shop_price="
+				+ shop_price + ", pimage=" + pimage + ", pdate=" + pdate + ", is_hot=" + is_hot + ", pdesc=" + pdesc
+				+ ", pflag=" + pflag + ", c=" + c + "]";
+	}
 	
 	
 	

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.sgg.zh.dao.ProductDao;
 import com.sgg.zh.dao.impl.ProductDaoImpl;
+import com.sgg.zh.entity.PageBean;
 import com.sgg.zh.entity.Product;
 import com.sgg.zh.service.ProductService;
 
@@ -34,6 +35,21 @@ public class ProductServiceImpl implements ProductService{
 	public Product getById(String pid) throws Exception {
 		ProductDao pd = new ProductDaoImpl();
 		return pd.getById(pid);
+	}
+
+	/**
+	 * 按类别分页查询商品
+	 */
+	@Override
+	public PageBean<Product> findByPage(int currPage, int pageSize, String cid) throws Exception {
+
+		ProductDao pd = new ProductDaoImpl();
+		//1.当前页数据
+		List<Product> list = pd.findByPage(currPage, pageSize, cid);
+		
+		//2.总数
+		int totalCount = pd.getTotalCount(cid);
+		return new PageBean<>(list, currPage, pageSize, totalCount);
 	}
 
 }

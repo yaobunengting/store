@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+	<!-- service -->
+	<bean id="ProductService" class="com.sgg.zh.service.impl.ProductServiceImpl" />
+	<bean id="UserService" class="com.sgg.zh.service.impl.UserServiceImpl" />
+	<bean id="CategoryService" class="com.sgg.zh.service.impl.CategoryServiceImpl"/>
+
+	<!-- dao -->
+	<bean id="ProductDao" class="com.sgg.zh.dao.impl.ProductDaoImpl" />
+	<bean id="UserDao" class="com.sgg.zh.dao.impl.UserDaoImpl" />
+	<bean id="CategoryDao" class="com.sgg.zh.dao.impl.CategoryDaoImpl" />
+</beans>
