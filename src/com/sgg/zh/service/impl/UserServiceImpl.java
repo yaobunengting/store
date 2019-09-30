@@ -4,16 +4,17 @@ import com.sgg.zh.dao.UserDao;
 import com.sgg.zh.dao.impl.UserDaoImpl;
 import com.sgg.zh.entity.User;
 import com.sgg.zh.service.UserService;
+import com.sgg.zh.utils.BeanFactory;
 import com.sgg.zh.utils.MailUtils;
 
 public class UserServiceImpl implements UserService{
+	UserDao dao = (UserDao) BeanFactory.getBean("UserDao");
 
 	/**
 	 * 用户注册
 	 */
 	@Override
 	public void regist(User user) throws Exception {
-		UserDao dao = new UserDaoImpl();
 		dao.add(user);
 		
 		//发送邮件
@@ -30,7 +31,6 @@ public class UserServiceImpl implements UserService{
 	 */
 	@Override
 	public User active(String code) throws Exception {
-		UserDao dao = new UserDaoImpl();
 		//1.通过code获取一个用户
 		User user = dao.getByCode(code);
 		
@@ -51,7 +51,6 @@ public class UserServiceImpl implements UserService{
 	 */
 	@Override
 	public User login(String username, String password) throws Exception {
-		UserDao dao = new UserDaoImpl();
 		return dao.getByUsernameAndPwd(username, password);
 	}
 

@@ -6,13 +6,14 @@ import com.sgg.zh.dao.CategoryDao;
 import com.sgg.zh.dao.impl.CategoryDaoImpl;
 import com.sgg.zh.entity.Category;
 import com.sgg.zh.service.CategoryService;
+import com.sgg.zh.utils.BeanFactory;
 
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Element;
 
 public class CategoryServiceImpl implements CategoryService {
-
+	CategoryDao cd = (CategoryDao) BeanFactory.getBean("CategoryDao");
 	/**
 	 * 查询所有的分类
 	 */
@@ -30,7 +31,6 @@ public class CategoryServiceImpl implements CategoryService {
 		// 4.判断数据
 		if (element == null) {
 			// element为空的话,我们要从数据库中获取
-			CategoryDao cd = new CategoryDaoImpl();
 			list = cd.findAll();
 			// 将list放入缓存
 			cache.put(new Element("clist", list));

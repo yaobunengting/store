@@ -7,9 +7,10 @@ import com.sgg.zh.dao.impl.ProductDaoImpl;
 import com.sgg.zh.entity.PageBean;
 import com.sgg.zh.entity.Product;
 import com.sgg.zh.service.ProductService;
+import com.sgg.zh.utils.BeanFactory;
 
 public class ProductServiceImpl implements ProductService{
-
+	ProductDao pd = (ProductDao) BeanFactory.getBean("ProductDao");
 	/**
 	 * 查询最新商品
 	 */
@@ -24,7 +25,6 @@ public class ProductServiceImpl implements ProductService{
 	 */
 	@Override
 	public List<Product> findHot() throws Exception {
-		ProductDao pd = new ProductDaoImpl();
 		return pd.findHot();
 	}
 
@@ -33,7 +33,6 @@ public class ProductServiceImpl implements ProductService{
 	 */
 	@Override
 	public Product getById(String pid) throws Exception {
-		ProductDao pd = new ProductDaoImpl();
 		return pd.getById(pid);
 	}
 
@@ -42,8 +41,6 @@ public class ProductServiceImpl implements ProductService{
 	 */
 	@Override
 	public PageBean<Product> findByPage(int currPage, int pageSize, String cid) throws Exception {
-
-		ProductDao pd = new ProductDaoImpl();
 		//1.当前页数据
 		List<Product> list = pd.findByPage(currPage, pageSize, cid);
 		
