@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans>
+
+	<!-- bean -->
+	<bean id="CartItem" class="com.sgg.zh.entity.CartItem" />
+	<bean id="Cart" class="com.sgg.zh.entity.Cart" />
+	
 	<!-- service -->
 	<bean id="ProductService" class="com.sgg.zh.service.impl.ProductServiceImpl" />
 	<bean id="UserService" class="com.sgg.zh.service.impl.UserServiceImpl" />

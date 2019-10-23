@@ -1,6 +1,7 @@
 package com.sgg.zh.entity;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -8,6 +9,14 @@ public class Cart implements Serializable{
 	private Map<String, CartItem> map = new LinkedHashMap<>();	//存放购物车项的集合:key商品id cartItem:购物车项,使用map集合便于删除单个购物车项
 	
 	private Double total = 0.0;	//总金额
+	
+	/**
+	 * 获取所有的购物车项
+	 * @return
+	 */
+	public Collection<CartItem> getItems() {
+		return map.values();
+	}
 	
 	/**
 	 * 添加到购物车

@@ -12,8 +12,8 @@ public class CartItem implements Serializable{
 	private Integer count;	//商品数量
 	private Double subtotal = 0.0;	//小计
 	
-
 	public CartItem() {}
+	
 	public CartItem(Product product, Integer count) {
 		this.product = product;
 		this.count = count;
