@@ -125,6 +125,9 @@ public class DataSourceUtils {
 		}
 	}
 
+	/**
+	 * ÊÂÎñ»Ø¹ö
+	 */
 	public static void rollbackAndClose() {
 		Connection conn = null;
 		try {

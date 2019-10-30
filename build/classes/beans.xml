@@ -9,9 +9,11 @@
 	<bean id="ProductService" class="com.sgg.zh.service.impl.ProductServiceImpl" />
 	<bean id="UserService" class="com.sgg.zh.service.impl.UserServiceImpl" />
 	<bean id="CategoryService" class="com.sgg.zh.service.impl.CategoryServiceImpl"/>
+	<bean id="OrderService" class="com.sgg.zh.service.impl.OrderServiceImpl"/>
 
 	<!-- dao -->
 	<bean id="ProductDao" class="com.sgg.zh.dao.impl.ProductDaoImpl" />
 	<bean id="UserDao" class="com.sgg.zh.dao.impl.UserDaoImpl" />
 	<bean id="CategoryDao" class="com.sgg.zh.dao.impl.CategoryDaoImpl" />
+	<bean id="OrderDao" class="com.sgg.zh.dao.impl.OrderDaoImpl"/>
 </beans>
