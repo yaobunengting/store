@@ -93,6 +93,8 @@ public class OrderServlet extends BaseServlet {
 	}
 	
 	
-	public String find
+	public String findAllByPage(HttpServletRequest request, HttpServletResponse response) {
+		return null;
+	}
 
 }
