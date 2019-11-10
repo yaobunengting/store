@@ -5,6 +5,8 @@ import java.util.List;
 import com.sgg.zh.dao.OrderDao;
 import com.sgg.zh.entity.Order;
 import com.sgg.zh.entity.OrderItem;
+import com.sgg.zh.entity.PageBean;
+import com.sgg.zh.entity.User;
 import com.sgg.zh.service.OrderService;
 import com.sgg.zh.utils.BeanFactory;
 import com.sgg.zh.utils.DataSourceUtils;
@@ -38,6 +40,20 @@ public class OrderServiceImpl implements OrderService {
 			throw e;
 		}
 		
+	}
+
+	/**
+	 * 分页查询订单
+	 */
+	@Override
+	public PageBean<Order> findAllByPage(int currPage, int pageSize, User user) throws Exception {
+		//查询当前页数据
+		OrderDao od = (OrderDao) BeanFactory.getBean("OrderDao");
+		List<Order> list = od.findAllByPage(currPage, pageSize, user.getUid());
+		//查询总条数
+		int totalCount = od.getTotalCount(user.getUid());
+		
+		return new PageBean<Order>(list, currPage, pageSize, totalCount);
 	}
 
 }

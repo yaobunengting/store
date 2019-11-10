@@ -1,10 +1,8 @@
 package com.sgg.zh.web.servlet;
 
-import java.io.IOException;
 import java.util.Collection;
 import java.util.Date;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,6 +11,7 @@ import com.sgg.zh.entity.Cart;
 import com.sgg.zh.entity.CartItem;
 import com.sgg.zh.entity.Order;
 import com.sgg.zh.entity.OrderItem;
+import com.sgg.zh.entity.PageBean;
 import com.sgg.zh.entity.User;
 import com.sgg.zh.service.OrderService;
 import com.sgg.zh.utils.BeanFactory;
@@ -92,9 +91,37 @@ public class OrderServlet extends BaseServlet {
 		return "/jsp/order_info.jsp";
 	}
 	
-	
-	public String findAllByPage(HttpServletRequest request, HttpServletResponse response) {
-		return null;
+	/**
+	 * 分页查询我的订单
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception 
+	 */
+	public String findAllByPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		//1.获取当前页
+		int currPage = 0;
+		if (null == request.getParameter("currPage")) {
+			currPage = 1;
+		} else {
+			currPage = Integer.parseInt(request.getParameter("currPage"));	
+		}
+		int pageSize = 3;
+		
+		//2.获取用户
+		User user = (User) request.getSession().getAttribute("user");
+		if(null == user) {
+			request.setAttribute("msg", "您还没有登录,请登录");
+			return "/jsp/msg.jsp";
+		}
+		//3.调用service,分页查询 参数:currPage, pageSize, user;返回值PageBean
+		OrderService os = (OrderService) BeanFactory.getBean("OrderService");
+		PageBean<Order> pb = os.findAllByPage(currPage, pageSize, user);
+		
+		//4.将PageBean放入request域中
+		request.setAttribute("pb", pb);
+		//5.请求转发
+		return "/jsp/order_list.jsp";
 	}
 
 }
