@@ -56,4 +56,13 @@ public class OrderServiceImpl implements OrderService {
 		return new PageBean<Order>(list, currPage, pageSize, totalCount);
 	}
 
+	/**
+	 * 查看订单详情
+	 */
+	@Override
+	public Order getById(String oid) throws Exception {
+		OrderDao od = (OrderDao) BeanFactory.getBean("OrderDao");
+		return od.getById(oid);
+	}
+
 }

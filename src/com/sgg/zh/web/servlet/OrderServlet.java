@@ -123,5 +123,27 @@ public class OrderServlet extends BaseServlet {
 		//5.请求转发
 		return "/jsp/order_list.jsp";
 	}
+	
+	/**
+	 * 查看订单详情
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception 
+	 */
+	public String getById(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		//1.获取oid
+		String oid = request.getParameter("oid");
+		
+		//2.调用service通过oid获取order对象
+		OrderService os = (OrderService) BeanFactory.getBean("OrderService");
+		Order order = os.getById(oid);
+		System.out.println("order:" + order.toString());
+		//3.将order对象放入域中
+		request.setAttribute("order", order);
+		
+		
+		return "/jsp/order_info.jsp";
+	}
 
 }

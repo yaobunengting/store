@@ -15,4 +15,6 @@ public interface OrderDao {
 
 	int getTotalCount(String uid) throws Exception;
 
+	Order getById(String oid) throws Exception;
+
 }

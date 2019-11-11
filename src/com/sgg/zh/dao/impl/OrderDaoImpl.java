@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.MapListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
@@ -81,6 +82,34 @@ public class OrderDaoImpl implements com.sgg.zh.dao.OrderDao {
 		QueryRunner qr = new QueryRunner(DataSourceUtils.getDataSource());
 		String sql = "SELECT count(*) FROM Orders WHERE uid = ?";
 		return ((Long)qr.query(sql, new ScalarHandler(), uid)).intValue();
+	}
+
+	/**
+	 * 通过oid查询订单详情
+	 */
+	@Override
+	public Order getById(String oid) throws Exception {
+		QueryRunner qr = new QueryRunner(DataSourceUtils.getDataSource());
+		String sql = "SELECT * FROM orders WHERE oid = ?";
+		Order order = (Order) qr.query(sql, new BeanHandler<>(Order.class), oid);
+		
+		sql = "SELECT * FROM orderitem oi, product p WHERE oi.pid = p.pid AND oi.oid = ?";
+		List<Map<String, Object>> lists = qr.query(sql, new MapListHandler(), oid);
+		for(Map<String, Object> list : lists) {
+			//封装Product对象
+			Product p = new Product();
+			BeanUtils.populate(p, list);
+			
+			//封装OrderItem对象
+			OrderItem oi = new OrderItem();
+			BeanUtils.populate(oi, list);
+			oi.setProduct(p);
+			
+			//将OrderItem加入Order的items中
+			order.getItems().add(oi);
+		}
+			
+		return order;
 	}
 
 }

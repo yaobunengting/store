@@ -56,5 +56,12 @@ public class OrderItem implements Serializable{
 	public void setOrder(Order order) {
 		this.order = order;
 	}
+
+	@Override
+	public String toString() {
+		return "OrderItem [itemId=" + itemId + ", count=" + count + ", subtotal=" + subtotal + ", product=" + product
+				+ ", order=" + order + "]";
+	}
+	
 	
 }

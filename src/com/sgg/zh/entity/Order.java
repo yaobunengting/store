@@ -70,6 +70,11 @@ public class Order implements Serializable{
 	}
 	public void setItems(List<OrderItem> items) {
 		this.items = items;
+	}
+	@Override
+	public String toString() {
+		return "Order [oid=" + oid + ", ordetTime=" + ordetTime + ", total=" + total + ", state=" + state + ", address="
+				+ address + ", name=" + name + ", telephone=" + telephone + ", user=" + user + ", items=" + items + "]";
 	} 
 	
 	

@@ -10,4 +10,6 @@ public interface OrderService {
 
 	PageBean<Order> findAllByPage(int currPage, int pageSize, User user) throws Exception;
 
+	Order getById(String oid) throws Exception;
+
 }
