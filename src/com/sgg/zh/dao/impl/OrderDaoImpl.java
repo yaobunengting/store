@@ -112,4 +112,14 @@ public class OrderDaoImpl implements com.sgg.zh.dao.OrderDao {
 		return order;
 	}
 
+	/**
+	 * ÐÞ¸Ä¶©µ¥
+	 */
+	@Override
+	public void update(Order order) throws Exception {
+		QueryRunner qr = new QueryRunner(DataSourceUtils.getDataSource());
+		String sql = "Update orders set state = ?, address = ?, name = ?, telephone = ? WHERE oid = ?";
+		qr.update(sql, order.getState(), order.getAddress(), order.getName(), order.getTelephone(), order.getOid());
+	}
+
 }

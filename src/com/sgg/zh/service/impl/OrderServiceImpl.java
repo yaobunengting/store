@@ -65,4 +65,11 @@ public class OrderServiceImpl implements OrderService {
 		return od.getById(oid);
 	}
 
+	@Override
+	public void update(Order order) throws Exception {
+		// TODO Auto-generated method stub
+		OrderDao od = (OrderDao) BeanFactory.getBean("OrderDao");
+		od.update(order);
+	}
+
 }
