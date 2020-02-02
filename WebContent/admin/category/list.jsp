@@ -8,7 +8,7 @@
 		<script language="javascript" src="${pageContext.request.contextPath}/js/public.js"></script>
 		<script type="text/javascript">
 			function addCategory(){
-				window.location.href = "${pageContext.request.contextPath}/";
+				window.location.href = "${pageContext.request.contextPath}/adminCategory?method=addUI";
 			}
 		</script>
 	</HEAD>
@@ -24,7 +24,7 @@
 					<tr>
 						<td class="ta_01" align="right">
 							<button type="button" id="add" name="add" value="添加" class="button_add" onclick="addCategory()">
-&#28155;&#21152;
+添加分类
 </button>
 
 						</td>
@@ -62,13 +62,13 @@
 												${c.cname }
 											</td>
 											<td align="center" style="HEIGHT: 22px">
-												<a href="${ pageContext.request.contextPath }/adminCategory?methon=getById&cid=${c.cid}">
+												<a href="${ pageContext.request.contextPath }/adminCategory?method=getById&cid=${c.cid}">
 													<img src="${pageContext.request.contextPath}/images/i_edit.gif" border="0" style="CURSOR: hand">
 												</a>
 											</td>
 									
 											<td align="center" style="HEIGHT: 22px">
-												<a href="${ pageContext.request.contextPath }/adminCategory">
+												<a href="javascript:void(0)" onclick="deleteCategory('${c.cid}')">
 													<img src="${pageContext.request.contextPath}/images/i_del.gif" width="16" height="16" border="0" style="CURSOR: hand">
 												</a>
 											</td>
@@ -80,5 +80,12 @@
 				</TBODY>
 			</table>
 	</body>
+	<script type="text/javascript">
+		function deleteCategory(cid){
+			if(confirm("你确定要删除该分类吗")) {
+				location.href="${pageContext.request.contextPath }/adminCategory?method=delete&cid="+cid;
+			}
+		}
+	</script>
 </HTML>
 

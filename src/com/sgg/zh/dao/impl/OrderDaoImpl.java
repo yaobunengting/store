@@ -122,4 +122,21 @@ public class OrderDaoImpl implements com.sgg.zh.dao.OrderDao {
 		qr.update(sql, order.getState(), order.getAddress(), order.getName(), order.getTelephone(), order.getOid());
 	}
 
+	/**
+	 * 根据state查询订单
+	 */
+	@Override
+	public List<Order> findAllByState(String state) throws Exception {
+		QueryRunner qr = new QueryRunner(DataSourceUtils.getDataSource());
+		//state == null(所有订单) 0(未支付订单)	1(已支付订单)	2(已发货订单)
+		String sql = "SELECT * FROM orders WHERE 1=1 ";	//查询所有订单
+		
+		if(state != null && state.trim().length() > 0) {
+			sql += "and state = ? ORDER BY ordertime DESC";
+			return qr.query(sql, new BeanListHandler<>(Order.class), state);
+		}
+		sql += " ORDER BY ordertime DESC";
+		return qr.query(sql, new BeanListHandler<>(Order.class));
+	}
+
 }

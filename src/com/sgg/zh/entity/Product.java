@@ -18,9 +18,9 @@ public class Product implements Serializable{
 	private Date pdate;
 	private Integer is_hot = 0;	//是否热门	1:热门  0:否
 	private String pdesc;
-	private Integer pflag = 0;	//是否下架	1:下架  0:为下架
+	private Integer pflag = 0;	//是否下架	1:下架  0:不下架
 	//属于哪个分类
-	private Category c;
+	private Category category;
 	public String getPid() {
 		return pid;
 	}
@@ -75,17 +75,17 @@ public class Product implements Serializable{
 	public void setPflag(Integer pflag) {
 		this.pflag = pflag;
 	}
-	public Category getC() {
-		return c;
+	public Category getCategory() {
+		return category;
 	}
-	public void setC(Category c) {
-		this.c = c;
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 	@Override
 	public String toString() {
 		return "Product [pid=" + pid + ", pname=" + pname + ", market_price=" + market_price + ", shop_price="
 				+ shop_price + ", pimage=" + pimage + ", pdate=" + pdate + ", is_hot=" + is_hot + ", pdesc=" + pdesc
-				+ ", pflag=" + pflag + ", c=" + c + "]";
+				+ ", pflag=" + pflag + ", c=" + category + "]";
 	}
 	
 	

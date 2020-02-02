@@ -1,5 +1,7 @@
 package com.sgg.zh.service;
 
+import java.util.List;
+
 import com.sgg.zh.entity.Order;
 import com.sgg.zh.entity.PageBean;
 import com.sgg.zh.entity.User;
@@ -13,5 +15,7 @@ public interface OrderService {
 	Order getById(String oid) throws Exception;
 
 	void update(Order order) throws Exception;
+
+	List<Order> findAllByState(String state) throws Exception;
 
 }

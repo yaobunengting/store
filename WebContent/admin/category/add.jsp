@@ -8,6 +8,11 @@
 	
 	<body>
 		<form id="userAction_save_do" name="Form1" action="${pageContext.request.contextPath}/adminCategory" method="post">
+			<!-- 
+				为什么可以调用adminCategoryServlet的add方法
+				因为在adminCategoryServlet的父类BaseServlet中String m = request.getParameter("method");
+				通过反射获取了请求方法
+			 -->
 			<input type="hidden" name="method" value="add">
 			&nbsp;
 			<table cellSpacing="1" cellPadding="5" width="100%" align="center" bgColor="#eeeeee" style="border: 1px solid #8ba7e3" border="0">

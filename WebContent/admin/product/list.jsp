@@ -5,10 +5,10 @@
 		<meta http-equiv="Content-Language" content="zh-cn">
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<link href="${pageContext.request.contextPath}/css/Style1.css" rel="stylesheet" type="text/css" />
-		<script language="javascript" src="${pageContext.request.contextPath}/js/public.js"></script>
+		<%-- <script language="javascript" src="${pageContext.request.contextPath}/js/public.js"></script> --%>
 		<script type="text/javascript">
 			function addProduct(){
-				window.location.href = "${pageContext.request.contextPath}/adminProduct_addPage.action";
+				window.location.href = "${pageContext.request.contextPath}/adminProduct?method=addUI";
 			}
 		</script>
 	</HEAD>
@@ -25,7 +25,7 @@
 					<tr>
 						<td class="ta_01" align="right">
 							<button type="button" id="add" name="add" value="添加" class="button_add" onclick="addProduct()">
-&#28155;&#21152;
+添加
 </button>
 
 						</td>
@@ -57,10 +57,12 @@
 										编辑
 									</td>
 									<td width="7%" align="center">
-										删除
+										上架
 									</td>
 								</tr>
 								<c:forEach items="${list }" var="p" varStatus="vs">
+									<c:if test="${p.pflag == 0 }">
+									
 										<tr onmouseover="this.style.backgroundColor = 'white'"
 											onmouseout="this.style.backgroundColor = '#F5FAFE';">
 											<td style="CURSOR: hand; HEIGHT: 22px" align="center"
@@ -73,7 +75,7 @@
 											</td>
 											<td style="CURSOR: hand; HEIGHT: 22px" align="center"
 												width="17%">
-												${p.market_price }
+												${p.pname }
 											</td>
 											<td style="CURSOR: hand; HEIGHT: 22px" align="center"
 												width="17%">
@@ -91,12 +93,50 @@
 											</td>
 									
 											<td align="center" style="HEIGHT: 22px">
-												<a href="${ pageContext.request.contextPath }/adminProduct_delete.action?pid=">
+												<a href="${ pageContext.request.contextPath }/adminProduct?method=updateState&pid=${p.pid}">
 													<img src="${pageContext.request.contextPath}/images/i_del.gif" width="16" height="16" border="0" style="CURSOR: hand">
 												</a>
 											</td>
 										</tr>
-									</c:forEach>
+									</c:if>
+									<c:if test="${p.pflag ==1 }">
+										<tr onmouseover="this.style.backgroundColor = 'white'"
+											onmouseout="this.style.backgroundColor = '#F5FAFE';">
+											<td style="CURSOR: hand; HEIGHT: 22px" align="center"
+												width="18%">
+												${vs.count }
+											</td>
+											<td style="CURSOR: hand; HEIGHT: 22px" align="center"
+												width="17%">
+												<img width="40" height="45" src="${ pageContext.request.contextPath }/${p.pimage}">
+											</td>
+											<td style="CURSOR: hand; HEIGHT: 22px" align="center"
+												width="17%">
+												${p.pname }
+											</td>
+											<td style="CURSOR: hand; HEIGHT: 22px" align="center"
+												width="17%">
+												${p.shop_price }
+											</td>
+											<td style="CURSOR: hand; HEIGHT: 22px" align="center"
+												width="17%">
+												<c:if test="${p.is_hot==1 }">是</c:if>
+												<c:if test="${p.is_hot!=1 }">否</c:if>
+											</td>
+											<td align="center" style="HEIGHT: 22px">
+												<a href="${ pageContext.request.contextPath }/adminProduct_edit.action?pid=">
+													<img src="${pageContext.request.contextPath}/images/i_edit.gif" border="0" style="CURSOR: hand">
+												</a>
+											</td>
+									
+											<td align="center" style="HEIGHT: 22px">
+												<a href="${ pageContext.request.contextPath }/adminProduct?method=updateState&pid=${p.pid}">
+													<img src="${pageContext.request.contextPath}/images/i_del.gif" width="16" height="16" border="0" style="CURSOR: hand">
+												</a>
+											</td>
+										</tr>
+									</c:if>
+								</c:forEach>
 							</table>
 						</td>
 					</tr>

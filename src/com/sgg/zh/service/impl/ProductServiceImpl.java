@@ -49,4 +49,33 @@ public class ProductServiceImpl implements ProductService{
 		return new PageBean<>(list, currPage, pageSize, totalCount);
 	}
 
+	/**
+	 * 查询所有商品
+	 */
+	@Override
+	public List<Product> findAll() throws Exception {
+		return pd.findAll();
+	}
+
+	/**
+	 * 添加商品
+	 */
+	@Override
+	public void add(Product p) throws Exception {
+		pd.add(p);
+	}
+
+	/**
+	 * 更新商品
+	 */
+	@Override
+	public void update(Product p) throws Exception {
+		pd.update(p);
+	}
+
+	@Override
+	public List<Product> findAllByTakeOff() throws Exception {
+		return pd.findAllByTakeOff();
+	}
+
 }

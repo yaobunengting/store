@@ -19,6 +19,8 @@ import com.sgg.zh.utils.BeanFactory;
 import com.sgg.zh.utils.PaymentUtil;
 import com.sgg.zh.utils.UUIDUtils;
 
+import net.sf.ehcache.search.expression.Or;
+
 /**
  * 订单模块
  */
@@ -208,8 +210,22 @@ public class OrderServlet extends BaseServlet {
 		
 		return null;
 		
+	}
+	
+	public String updateState(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		//获取oid
+		String oid = request.getParameter("oid");
 		
+		//调用service修改订单状态
+		OrderService os = (OrderService) BeanFactory.getBean("OrderService");
+		Order order = os.getById(oid);
 		
+		order.setState(3);
+		os.update(order);
+		
+		//重定向
+		response.sendRedirect(request.getContextPath() + "/order?method=findAllByPage&currPage=1");
+		return null;
 	}
 
 }
